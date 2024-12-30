@@ -20,6 +20,8 @@
   --border-lang-color: #808080;
   --button-send-color: #007bff;
   --button-send-color-hover: #0056b3;
+  --bg-color-textarea: #414141;
+  --bg-color-message: #414141;
 }
 
 html {

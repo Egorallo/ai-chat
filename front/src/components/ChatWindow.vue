@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import ArrowIcon from '@/components/icons/ArrowIcon.vue';
+import MessageContainer from '@/components/ChatMessageContainer.vue';
+
+const messages: { text: string; isAnswer: boolean }[] = [
+  { text: 'Hello', isAnswer: false },
+  { text: 'Hi, user!', isAnswer: true },
+  { text: 'What time is it now?', isAnswer: false },
+  { text: "It's 2pm.", isAnswer: true },
+];
 
 function handleClick() {
   console.log('Button clicked');
@@ -18,11 +27,7 @@ function adjustHeight(event) {
       <h1 class="chat__window__header__title">AI Chat 🤖</h1>
     </div>
     <div class="chat__window__body">
-      <div class="chat__window__body__messages">
-        <div class="chat__window__body__messages__message">
-          <p>Message</p>
-        </div>
-      </div>
+      <MessageContainer :messages="messages" />
     </div>
     <div class="chat__window__footer">
       <div class="chat__window__footer__wrapper">
@@ -94,7 +99,7 @@ function adjustHeight(event) {
   min-height: 40px;
   max-height: 200px;
   overflow-y: auto;
-  background-color: var(--bg-color-rating);
+  background-color: var(--bg-color-textarea);
   color: var(--text-main-color);
 }
 
