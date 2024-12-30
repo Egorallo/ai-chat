@@ -1,5 +1,3 @@
-@import url(shared.css);
-@import url(utils.css);
 :root {
   --bg-color: #2c2c2c;
   --text-main-color: #fff;
@@ -20,6 +18,8 @@
   --color-nav-left: #00ffe5;
   --bg-color-lang: #ff7300;
   --border-lang-color: #808080;
+  --button-send-color: #007bff;
+  --button-send-color-hover: #0056b3;
 }
 
 html {
@@ -53,4 +53,3 @@ body {
   font-size: 14px;
   color: var(--text-main-color);
 }
-
