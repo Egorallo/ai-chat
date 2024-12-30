@@ -4,7 +4,7 @@ const apiClient = axios.create({
   baseURL: 'http://localhost:3000',
 });
 
-export const sendMessage = async (message: string) => {
+export const sendMsg = async (message: string) => {
   try {
     console.log('Sending message to AI:', message);
     const response = await apiClient.post('/chat', { message });
