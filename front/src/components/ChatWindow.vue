@@ -2,17 +2,61 @@
 import { ref } from 'vue';
 import ArrowIcon from '@/components/icons/ArrowIcon.vue';
 import MessageContainer from '@/components/ChatMessageContainer.vue';
+import { sendMessage } from '@/services/api';
 
-const messages: { text: string; isAnswer: boolean }[] = [
-  { text: 'Hello', isAnswer: false },
-  { text: 'Hi, user!', isAnswer: true },
-  { text: 'What time is it now?', isAnswer: false },
-  { text: "It's 2pm.", isAnswer: true },
-];
+const message = ref('');
+const messages = ref<{ text: string; isAnswer: boolean }[]>([]);
+
+const handleSendMessage = async () => {
+  try {
+    if (!message.value.trim()) return;
+    console.log('Message:', message.value);
+
+    messages.value.push({ text: message.value, isAnswer: false });
+
+    message.value = '';
+
+    const response = await sendMessage(messages.value[messages.value.length - 1].text);
+
+    messages.value.push({ text: response.message, isAnswer: true });
+  } catch (error) {
+    console.error('Error in sending message:', error);
+  }
+};
+
+// const messages: { text: string; isAnswer: boolean }[] = [
+//   { text: 'Hello', isAnswer: false },
+//   { text: 'Hi, user!', isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   {
+//     text: 'Yes, Skibidi Toilet is in Fortnite!\n\nThe popular internet series, which features a poorly animated head popping out of a toilet, has been added to the game as a skin and bundle. The Skibidi Toilet Bundle includes the character Plungerman, themed back gear, toilet plunger harvesting tools, and the skibidi pack.\n\nThe bundle was released on Wednesday, 18th December 2024, and is available to purchase from the in-game Item Shop.',
+//     isAnswer: true,
+//   },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+//   { text: 'What time is it now?', isAnswer: false },
+//   { text: "It's 2pm.", isAnswer: true },
+// ];
 
 function handleClick() {
   console.log('Button clicked');
 }
+
+const handleEnter = (event: KeyboardEvent) => {
+  if (!event.shiftKey) {
+    event.preventDefault();
+  }
+};
 
 function adjustHeight(event) {
   const textarea = event.target;
@@ -35,10 +79,12 @@ function adjustHeight(event) {
           class="chat__window__footer__textarea"
           placeholder="Type a message..."
           @input="adjustHeight"
-          @keyup.enter="handleClick"
+          @keydown.enter="handleEnter"
+          @keyup.enter="handleSendMessage"
           ref="textarea"
+          v-model="message"
         ></textarea>
-        <button @click="handleClick" class="chat__window__footer__button">
+        <button @click="handleSendMessage" class="chat__window__footer__button">
           <ArrowIcon />
         </button>
       </div>
@@ -67,9 +113,10 @@ function adjustHeight(event) {
 }
 
 .chat__window__body {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 16px;
   flex: 1;
+  overflow: auto;
 }
 
 .chat__window__footer {

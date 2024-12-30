@@ -30,7 +30,7 @@ const props = defineProps<Props>();
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
   width: 100%;
   height: 100%;
   padding: 10px;

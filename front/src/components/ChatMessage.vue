@@ -20,15 +20,15 @@ const props = defineProps<Props>();
   max-width: 70%;
   background-color: var(--bg-color-message);
   border-radius: 16px;
-  min-height: 30px;
+  height: auto;
   padding: 10px;
   display: inline-block;
-  word-wrap: break-word;
   white-space: pre-wrap;
 }
 
 .message-ai {
   align-self: flex-start;
+  background-color: var(--bg-color-message-ai);
 }
 
 .message-user {
