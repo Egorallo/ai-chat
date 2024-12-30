@@ -1,0 +1,56 @@
+@import url(shared.css);
+@import url(utils.css);
+:root {
+  --bg-color: #2c2c2c;
+  --text-main-color: #fff;
+  --text-secondary-color: #b0b0b0;
+  --bg-color-form: #2c2c2c;
+  --color-icon: #ffffff;
+  --button-main-color: #ff7300;
+  --button-delete-color: #ff4d4d;
+  --button-text-color: #000000;
+  --button-main-color-hover: #ff9c4d;
+  --button-disabled-color: #ccc;
+  --text-file-select-color: #8c8b8b;
+  --bg-color-file-select: #4c4c4c;
+  --border-file-select-color: #8c8a8a;
+  --color-modal-body-title: #ff7300;
+  --bg-color-rating: #414141;
+  --bg-color-landmark-item: #414141;
+  --color-nav-left: #00ffe5;
+  --bg-color-lang: #ff7300;
+  --border-lang-color: #808080;
+}
+
+html {
+  background-color: var(--bg-color);
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Mulish', serif;
+  font-size: 14px;
+  color: var(--text-main-color);
+}
+
