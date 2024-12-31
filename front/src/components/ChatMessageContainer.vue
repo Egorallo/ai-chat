@@ -36,8 +36,6 @@ defineProps<Props>();
   width: 100%;
   height: 100%;
   padding: 10px;
-  overflow-y: auto;
-  scrollbar-width: thin;
 }
 
 .loader {

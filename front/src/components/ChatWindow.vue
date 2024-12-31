@@ -93,9 +93,9 @@ onMounted(() => {
 .chat__window__body {
   border-radius: 16px;
   flex: 1;
-  overflow: auto;
+  overflow-y: auto;
+  scrollbar-color: black rgba(0, 0, 0, 0);
 }
-
 .chat__window__footer {
   display: flex;
   justify-content: center;
