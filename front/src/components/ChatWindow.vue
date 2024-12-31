@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import ArrowIcon from '@/components/icons/ArrowIcon.vue';
 import MessageContainer from '@/components/ChatMessageContainer.vue';
 import { useMessagesStore } from '@/stores/messages';
@@ -28,6 +28,10 @@ function adjustHeight(event) {
   textarea.style.height = 'auto';
   textarea.style.height = `${textarea.scrollHeight}px`;
 }
+
+onMounted(() => {
+  messageStore.loadMessagesFromLocalStorage();
+});
 </script>
 
 <template>

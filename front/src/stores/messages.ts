@@ -11,9 +11,15 @@ export const useMessagesStore = defineStore('messages', () => {
 
       const response = await sendMsg(message);
       messages.value.push({ text: response.message, isAnswer: true });
+      localStorage.setItem('messages', JSON.stringify(messages.value));
     } catch (error) {
       console.error('error sending message to AI:', error);
     }
   }
-  return { messages, sendMessage };
+
+  function loadMessagesFromLocalStorage() {
+    const savedMessages = JSON.parse(localStorage.getItem('messages') || '[]');
+    messages.value = savedMessages;
+  }
+  return { messages, sendMessage, loadMessagesFromLocalStorage };
 });
