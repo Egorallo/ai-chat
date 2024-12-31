@@ -9,9 +9,10 @@ interface Message {
 
 interface Props {
   messages: Message[];
+  isLoading: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
@@ -22,6 +23,7 @@ const props = defineProps<Props>();
       :is-answer="message.isAnswer"
       :key="index"
     />
+    <div class="loader" v-if="isLoading"></div>
   </div>
 </template>
 
@@ -36,5 +38,20 @@ const props = defineProps<Props>();
   padding: 10px;
   overflow-y: auto;
   scrollbar-width: thin;
+}
+
+.loader {
+  align-self: flex-start;
+  width: 60px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side, #4550e7 90%, #0000) 0 / calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: l1 1s steps(4) infinite;
+}
+
+@keyframes l1 {
+  to {
+    clip-path: inset(0 -34% 0 0);
+  }
 }
 </style>

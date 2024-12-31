@@ -9,11 +9,15 @@ const messageStore = useMessagesStore();
 const messages = computed(() => useMessagesStore().messages);
 const message = ref('');
 
+const isLoading = ref(false);
+
 const handleSendMessage = async () => {
   if (message.value.trim()) {
+    isLoading.value = true;
     const msgToSend = message.value;
     message.value = '';
     await messageStore.sendMessage(msgToSend);
+    isLoading.value = false;
   }
 };
 
@@ -23,8 +27,8 @@ const handleEnter = (event: KeyboardEvent) => {
   }
 };
 
-function adjustHeight(event) {
-  const textarea = event.target;
+function adjustHeight(event: Event) {
+  const textarea = event.target as HTMLTextAreaElement;
   textarea.style.height = 'auto';
   textarea.style.height = `${textarea.scrollHeight}px`;
 }
@@ -40,7 +44,7 @@ onMounted(() => {
       <h1 class="chat__window__header__title">AI Chat 🤖</h1>
     </div>
     <div class="chat__window__body">
-      <MessageContainer :messages="messages" />
+      <MessageContainer :messages="messages" :is-loading="isLoading" />
     </div>
     <div class="chat__window__footer">
       <div class="chat__window__footer__wrapper">
@@ -52,8 +56,13 @@ onMounted(() => {
           @keyup.enter="handleSendMessage"
           ref="textarea"
           v-model="message"
+          :disabled="isLoading"
         ></textarea>
-        <button @click="handleSendMessage" class="chat__window__footer__button">
+        <button
+          :disabled="isLoading"
+          @click="handleSendMessage"
+          class="chat__window__footer__button"
+        >
           <ArrowIcon />
         </button>
       </div>
